@@ -1,0 +1,33 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: "accounts" # This name match with the name accounts....yml mentionned in configserver
+  profiles:
+    active: "prod"
+  datasource:
+    url: jdbc:mysql://localhost:3306/accountsdb # install manually sqlectron to view the data
+    username: root
+    password: root
+  jpa:
+    show-sql: true
+  sql:
+    init:
+      mode: always
+  config:
+    import: "optional:configserver:http://localhost:8071/"
+  rabbitmq: # 2) spring cloud bus (RabbitMQ => Message Broker) to refresh all the instance of microservice without invoque any API when the code is change
+    host: "localhost"
+    port: 5672
+    username: "guest"
+    password: "guest"
+# 1) Refresh the microservice if spring cloud config change (refresh manually all the microservices)
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        # 1) include: "refresh" # actuactor (refresh manually all the microservices)
+        # 2) include: "busRefresh" # actuactor (refresh only one microservice)
+        # 3) webHook github (no need to refresh) => https://console.hookdeck.com/ https://hookdeck.com/  (hookdeck logout)
+        # google jib for docker images => mvn compile jib:dockerBuild
