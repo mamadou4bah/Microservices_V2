@@ -1,0 +1,16 @@
+spring:
+  config:
+    activate:
+      on-profile: "prod"
+
+build:
+  version: "1.0"
+
+loans:
+  message: "Welcome to bmwas-consulting loans related prod APIs "
+  contactDetails:
+  name: "Mamadou BAH - Product Owner"
+  email: "mamadou.bah@bmwas-consulting.com"
+  onCallSupport:
+    - (723) 656-8709
+    - (156) 342-0956
