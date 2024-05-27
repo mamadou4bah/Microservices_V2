@@ -6,7 +6,7 @@ spring:
   profiles:
     active: "prod"
   datasource:
-    url: jdbc:mysql://localhost:3306/accountsdb # install manually sqlectron to view the data
+    url: jdbc:mysql://localhost:3306/accountsdb # install manually sqlectron to view the data #docker run -p 3306:3306 --name accountsdb -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=accountsdb -d mysql
     username: root
     password: root
   jpa:
