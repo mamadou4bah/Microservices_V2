@@ -1,0 +1,59 @@
+  spring:
+    application:
+      name: "gatewayserver"
+    config:
+      import: "optional:configserver:http://localhost:8071/"
+    cloud:
+      gateway:
+        discovery:
+          locator:
+            enabled: false
+            lowerCaseServiceId: true
+        httpclient:
+          connect-timeout: 1000
+          response-timeout: 2s
+    data:
+      redis: #docker run -p 6379:6379 --name mamadou4bahredis -d redis
+        connect-timeout: 2s #To test, download apache benchmark on httpd.apache.org
+        host: localhost #ab -n 10 -c 2 -v 3 http://localhost:8072/mamadou4bah/cards/api/contact-info
+        port: 6379
+        timeout: 1s
+  management:
+    endpoints:
+      web:
+        exposure:
+          include: "*"
+    health:
+      readiness-state:
+        enabled: true
+      liveness-state:
+        enabled: true
+    endpoint:
+      gateway:
+        enabled: true
+      health:
+        probes:
+          enabled: true
+    info:
+      env:
+        enabled: true
+
+  info:
+    app:
+      name: "gatewayserver"
+      description: "bmwas consulting Gateway Server Application"
+      version: "1.0.0"
+
+  logging:
+    level:
+      com:
+        mamadou4bah:
+          gatewayserver: DEBUG
+
+  resilience4j.circuitbreaker:
+    configs:
+      default:
+        slidingWindowSize: 10
+        permittedNumberOfCallsInHalfOpenState: 2
+        failureRateThreshold: 50
+        waitDurationInOpenState: 10000
