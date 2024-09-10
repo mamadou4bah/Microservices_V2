@@ -1,0 +1,6 @@
+dependencies:
+- name: mbabank-common
+  repository: file://../../mbabank-common
+  version: 0.1.0
+digest: sha256:b924138be560b5385be0de01c46cf388e4c8247e38c3d2b8cd29904bdeb150d9
+generated: "2024-09-02T23:20:51.0989643+02:00"
