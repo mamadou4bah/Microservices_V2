@@ -1,0 +1,4 @@
+helm create mbabank-common
+helm dependencies build
+helm template .
+helm install arg1 arg2
